@@ -6,7 +6,7 @@ import getProductInfo from '../API/GetProductInfo';
 import getProductStyles from '../API/GetProductStyles';
 import getRatings from '../API/GetRatings';
 import AddItem from './AddToCart';
-import Header from './Header';
+import Header from './header';
 import PhotoCarousel from './ProductDisplay';
 import ProductDescription from './MainDescription';
 import SloganDescription from './SecondaryDescription';
@@ -69,27 +69,27 @@ const App = () => {
         <div class="row">
           <div class="col-sm-8">
             <div>
-              <PhotoCarousel currentStyle={currentStyle} 
+              <PhotoCarousel currentStyle={currentStyle}
               currentProduct={selectedProduct}/>
             </div>
           </div>
           <div class="col-sm-4">
-            <ProductDescription 
-            selected={selectedProduct} 
+            <ProductDescription
+            selected={selectedProduct}
             style={currentStyle}
             ratings={ratings}/>
             <RelatedStyles
             selectedStyleHandler={setCurrentStyle}
             selected={currentStyle}
             relatedStyles={relatedStyles}/>
-            <AddItem productData={selectedProduct} 
-            userId={userId} 
+            <AddItem productData={selectedProduct}
+            userId={userId}
             styleData={currentStyle}
             updateCartHeader={setUserSessionData}/>
           </div>
         </div>
         <div class="row">
-          <SloganDescription 
+          <SloganDescription
           selected={selectedProduct}
           style={currentStyle}/>
         </div>
