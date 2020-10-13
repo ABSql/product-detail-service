@@ -1,0 +1,161 @@
+.header-logo-kg {
+  font-family: 'Robertson Alternate';
+  src: url('./resources/Robertson-Alternate.ttf') format('truetype');
+  font-weight: normal;
+  color: red;
+  font-size: 60px;
+  margin-left: 20px;
+  padding-left: 20px;
+}
+
+h1 {
+  font-family: 'Roboto', 'sans-serif';
+  font-weight: 500;
+  background-color: white;
+  font-size: 28px;
+  color: #056676;
+}
+
+#body-kg {
+  background-image: url("https://i.ibb.co/r5jdb93/dangerzone.png");
+  background-position: right;
+  background-size: 15%;
+  object-fit: cover;
+  display: left;
+  background-repeat: no-repeat;
+  z-index: -1;
+  margin: 30 auto;
+  background-color: white;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 16px;
+  color: #056676;
+}
+
+#button-kg {
+  background-color: white;
+  font-family: 'Ubuntu', sans-serif;
+  border-color: #056676;
+  color: #056676;
+  border: 1px solid-#e8ded2;
+  text-align: left;
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  display: block;
+}
+
+#button-kg:hover {
+  color: #e8ded2;
+  border: 2px solid #056676;
+  background: #056676;
+  box-shadow: 0 1px 0 #5eaaa8;
+  transition-timing-function: ease-in;
+  transition: .3s;
+}
+
+#cart-kg {
+  float: right;
+  display: flex;
+  position: relative;
+  float: right;
+  margin: 0 1.5%;
+  width: 30%;
+  text-align: right;
+  padding-right: 40px;
+}
+
+#header-style-kg {
+  display: flex;
+  align-items: center;
+  padding-top: 15px;
+  margin-bottom: 50px;
+  border-bottom: 1px solid gray;
+}
+
+#searchbar-kg {
+  display: flex;
+  padding-right: 2em;
+  align-items: center;
+  height: 100%;
+  width: auto;
+}
+
+.box-style-kg {
+  position: relative;
+  display: flex;
+  padding-left: 20px;
+  padding-right: 10px;
+  height: auto;
+  width: 70%;
+  margin-left: 30px;
+}
+
+
+.slogan-style-kg {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.cart-display-kg {
+  align-items: center;
+  margin-right: 40px;
+  position: relative;
+  height: 100%;
+  width: auto;
+}
+
+.carousel-sec-style-kg {
+  display: flex;
+  width: 600;
+  height: 600;
+  object-fit: cover;
+}
+
+.carousel-img-style-kg {
+  height: 700px;
+  width: auto;
+  object-fit: cover;
+  display: block;
+}
+
+.default-img-kg {
+  background-image: url('https://i.ibb.co/0Y6ypRF/selectstyle.png');
+  height: 600px;
+  width: 600px;
+  object-fit: cover;
+  display: flex;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+#slogan-section-kg {
+  padding-bottom: 100px;
+}
+
+#slogan-header-kg {
+  padding-top: 10px;
+  padding-left: 20px;
+  font-size: 22px;
+  font-style: bold;
+  color: #056676;
+  background: transparent;
+  display: flex; 
+}
+
+#slogan-description-kg {
+  padding-left: 20px;
+  font-size: 18px;
+  list-style: none;
+  color: #056676;
+  display: flex;
+}
+
+.slogan-column-kg {
+  padding-top: 20px;
+}
+
+.avatar-style {
+  border: 2px solid white;
+  border-radius: 50%;
+}
+
