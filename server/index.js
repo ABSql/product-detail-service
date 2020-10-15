@@ -13,22 +13,30 @@ app.use(express.static(`../client/dist`));
 
 //Cart get request
 app.get(`cart/:userSession`, (req, res) => {
-  queries.getCartProducts(function(err, results) {
+  ProductInfo.find({
+    userSession: req.params.userSession
+  })
+  .exec(function(err, cart) {
     if (err) {
-      console.log('error getting cart items' + err)
+      console.log('error getting items from cart' + err)
+    } else {
+      res.json(cart)
     }
-    res.send(results)
-  }, req.params.userSession)
+  })
 })
 
 //get products by id
 app.get(`products/:productId`, (req, res) => {
-  queries.getCartProducts(function(err, results) {
+  ProductInfo.findOne({
+    _id: req.params.id
+  })
+  .exec(function(err, product) {
     if (err) {
       console.log('error getting product details' + err)
+    } else {
+      res.json(product)
     }
-    res.send(results)
-  }, req.params.productId)
+  })
 })
 
 //get products list
