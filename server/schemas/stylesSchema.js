@@ -5,7 +5,11 @@ let Schema = mongoose.Schema;
 const ratingsSchema = new mongoose.Schema({
 product_id: Number,
 results: [
-  {style_id: Number, name: String, original_price: String, sales_price: String, default?: Number,
+  {style_id: Number,
+    name: String,
+    original_price: String,
+    sales_price: String,
+    default?: Number,
       photos: [{thumbnail_url: String, user: String}],
       skus: {
         7: Number,
@@ -23,6 +27,6 @@ results: [
   ]
 })
 
-const Ratings = mongoose.model('Cart', ratingsSchema);
+const Styles = mongoose.model('Cart', ratingsSchema);
 
-module.exports = Ratings;
+module.exports = Styles;

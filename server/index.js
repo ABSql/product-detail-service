@@ -13,7 +13,7 @@ app.use(express.static(`../client/dist`));
 
 //Cart get request
 app.get(`cart/:userSession`, (req, res) => {
-  ProductInfo.find({
+  Cart.find({
     userSession: req.params.userSession
   })
   .exec(function(err, cart) {
@@ -41,32 +41,42 @@ app.get(`products/:productId`, (req, res) => {
 
 //get products list
 app.get(`products/list`, (req, res) => {
-  queries.getCartProducts(function(err, results) {
+  ProductList.find({})
+  .exec(function(err, list) {
     if (err) {
-      console.log('error getting product list' + err)
+      console.log('error getting products list' + err)
+    } else {
+      res.json(list)
     }
-    res.send(results)
-  }, req.params.productId)
+  })
 })
 
 //get styles by Id
 app.get(`products/productId/styles`, (req, res) => {
-  queries.getCartProducts(function(err, results) {
+  Styles.findOne({
+    _id: req.params.id
+  })
+  .exec(function(err, styles) {
     if (err) {
       console.log('error getting product styles' + err)
+    } else {
+      res.json(styles)
     }
-    res.send(results)
-  }, req.params.productId)
+  })
 })
 
 //get ratings for products
 app.get(`products/reviews/productId/meta`, (req, res) => {
-  queries.getCartProducts(function(err, results) {
+  Reviews.findOne({
+    _id: req.params.id
+  })
+  .exec(function(err, reviews) {
     if (err) {
-      console.log('error getting reviews' + err)
+      console.log('error getting product styles' + err)
+    } else {
+      res.json(reviews)
     }
-    res.send(results)
-  }, req.params.productId)
+  })
 })
 
 //post items to the cart
@@ -85,16 +95,3 @@ app.listen(PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`Hello, Scrumdog.  Your server is running on PORT: ${PORT}`);
 });
-
-/*
-app.get(`/employeeinfo/:id`, (req, res) => {
-  console.log('the request params are: ', req.params)
-  queries.getEmployeeById(function(err, results) {
-    if (err) {
-      throw err
-    }
-    res.send(results)
-  }, req.params.id)
-})
-
-*/
