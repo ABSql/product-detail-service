@@ -38,13 +38,26 @@ FOREIGN KEY (styleid) REFERENCES styles(style_id),
 
 /*photos and skus reference the styles table */
 CREATE TABLE IF NOT EXISTS skus (
-skuid integer AUTO_INCREMENT UNIQUE PRIMARY KEY
+sku_id integer AUTO_INCREMENT UNIQUE PRIMARY KEY
 FOREIGN KEY (styleid) REFERENCES styles(style_id),
+XS integer,
+S integer,
+M integer,
+L integer,
+XL integer,
+XXL integer,
+7 integer,
+8 integer,
+9 integer,
+10 integer,
+11 integer,
+12 integer,
+7.5 integer,
+8.5 integer,
+9.5 integer,
+10.5 integer,
+11.5 integer
 
-/*
-columns are not constant; sometimes are ints sometimes are sizes
-just add ALL OF THE KEYS AND RETURN THE ONES THAT ARENT NULL
-*/
 );
 
 /*cart has a unique id which should represent the user sessions, should only need to reference the product_ids that the user adds to cart*/
