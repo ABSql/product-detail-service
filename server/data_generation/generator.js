@@ -5,15 +5,15 @@ const argv = require('yargs').argv
 const lines = argv.lines || 100
 const filename = argv.output || 'posts.csv'
 const writeStream = fs.createWriteStream(filename)
-
+//productinfo needs: name, slogan, description, category, price
 const createPost = () => {
-  const userId = faker.random.number(10)
-  const title = faker.hacker.phrase()
-  const content = faker.lorem.paragraph()
-  const image = faker.image.image()
-  const date = faker.date.recent()
+  const productName = faker.commerce.productName();
+  const productSlogan = faker.company.catchPhrase();
+  const description = faker.lorem.sentence();
+  const category = faker.commerce.department();
+  const productPrice = faker.commerce.price();
 
-  return `${userId},${title},${content},${image},${date}\n`
+  return `${productName},${productSlogan},${description},${category},${productPrice}\n`
 }
 
 const startWriting = (writeStream, encoding, done) => {
