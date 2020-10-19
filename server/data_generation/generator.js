@@ -2,9 +2,9 @@ const fs = require('fs')
 const faker = require('faker')
 const argv = require('yargs').argv
 
-const lines = argv.lines || 100
+const lines = argv.lines || 10
 const filename = argv.output || 'posts.csv'
-const writeStream = fs.createWriteStream(filename)
+const stream = fs.createWriteStream(filename)
 //productinfo needs: name, slogan, description, category, price
 const createPost = () => {
   const productName = faker.commerce.productName();
@@ -24,6 +24,7 @@ const startWriting = (writeStream, encoding, done) => {
       i--
       let post = createPost()
       //check if i === 0 so we would write and call `done`
+      //else call write and continue looping
       if(i === 0){
         // we are done so fire callback
         writeStream.write(post, encoding, done)
@@ -43,7 +44,7 @@ const startWriting = (writeStream, encoding, done) => {
 }
 
 //write our `header` line before we invoke the loop
-stream.write(`userId,title,content,image,date\n`, 'utf-8')
+stream.write(`Product name, slogan, description, category, price\n`, 'utf-8')
 //invoke startWriting and pass callback
 startWriting(stream, 'utf-8', () => {
   stream.end()
