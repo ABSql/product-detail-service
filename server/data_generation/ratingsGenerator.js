@@ -3,7 +3,7 @@ const faker = require('faker')
 const argv = require('yargs').argv
 
 const lines = 100000
-const filename = 'styles.csv'
+const filename = 'ratings.csv'
 const stream = fs.createWriteStream(filename)
 //features need id, feature & value
 
@@ -13,14 +13,15 @@ const startWriting = (writeStream, encoding, done) => {
   let i = lines;
   let id = 0;
 
-  //style needs stylename, price, default_style (1 or 0)
   const createPost = () => {
 
-    const styleName = faker.commerce.color()
-    const price = faker.commerce.price()
-    const defaultStyle = 0
+    const one = Math.round(Math.random() * Math.floor(25))
+    const two = Math.round(Math.random() * Math.floor(25))
+    const three = Math.round(Math.random() * Math.floor(25))
+    const four = Math.round(Math.random() * Math.floor(25))
+    const five = Math.round(Math.random() * Math.floor(25))
 
-    return ` ${id},${id},${styleName},${price},${defaultStyle}\n`
+    return `${id},${id},${one},${two},${three},${four},${five}\n`
   }
 
   function writing(){
@@ -51,7 +52,7 @@ const startWriting = (writeStream, encoding, done) => {
 }
 
 //write our `header` line before we invoke the loop
-stream.write(`product_id,style_id,style_name,price,default\n`, 'utf-8')
+stream.write(`product_id,rating_id,one,two,three,four,five\n`, 'utf-8')
 //invoke startWriting and pass callback
 startWriting(stream, 'utf-8', () => {
   stream.end()

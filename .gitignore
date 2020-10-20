@@ -1,0 +1,7 @@
+node_modules
+./server/data_generation/features.csv
+./server/data_generation/photos.csv
+./server/data_generation/products.csv
+./server/data_generation/ratings.csv
+./server/data_generation/skus.csv
+./server/data_generation/styles.csv
