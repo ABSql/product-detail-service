@@ -16,7 +16,7 @@ USER="postgres"
 OUTPUT="posts.csv"
 FILEPATH="$DIR/$OUTPUT"
 # if parameter 1 is not passed as argument default records to be generated to 1000000
-LINES=${1:-10000}
+LINES=${1:-1000000}
 
 ### Import Our Database ###
 # Dont specify a database since CREATE DATABASE is in schema.sql
@@ -26,8 +26,8 @@ SCHEMA="$DIR/schema.sql"
 psql -U $USER < $SCHEMA
 
 ### Run Our Generator Script ###
-node generator.js --output=$FILEPATH --lines=$LINES
-
+node productGenerator.js --output=$FILEPATH --lines=$LINES
+node featureGenerator.js --output=$DIR/features.csv --lines=$LINES
 ### Import Our posts.csv file to seed Database ###
-psql -U $USER -d $DATABASE -c "COPY $DATABASE FROM '$FILEPATH' CSV HEADER";
-echo 'hello world'
+psql -U $USER -d $DATABASE -c "COPY productinfo FROM '$FILEPATH' CSV HEADER";
+psql -U $USER -d $DATABASE -c "COPY features FROM '$DIR/data_generation/features.csv' CSV HEADER";
