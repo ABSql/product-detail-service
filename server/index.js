@@ -1,12 +1,9 @@
 /* eslint-disable no-unused-vars */
 const express = require('express');
-
 const bodyParser = require('body-parser');
 const app = express();
 const PORT = 9000;
-
-const { Client } = require('pg');
-
+const queries = require()
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -14,102 +11,61 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(`../client/dist`));
 
 
-const client = new Client({
-  host: "localhost",
-  user: "postgres",
-  password: "myPassword",
-  database: "productdetailsdb"
-});
-client.connect();
-
-
-
-app.get(`cart/:userSession`, (req, res) => {
-  client.query()
-})
-
-
-
-
-
-
-
-
-
-
 //Cart get request
 app.get(`cart/:userSession`, (req, res) => {
-  Cart.find({
-    userSession: req.params.userSession
-  })
-  .exec(function(err, cart) {
+  queries.getCartProducts(function(err, results) {
     if (err) {
-      console.log('error getting items from cart' + err)
-    } else {
-      res.json(cart)
+      throw err;
     }
-  })
+    res.send(results)
+  }, req.params.userSession)
 })
 
 //get products by id
 app.get(`products/:productId`, (req, res) => {
-  ProductInfo.findOne({
-    _id: req.params.id
-  })
-  .exec(function(err, product) {
+  queries.getProductById(function(err, results) {
     if (err) {
-      console.log('error getting product details' + err)
-    } else {
-      res.json(product)
+      throw err;
     }
-  })
+    res.send(results)
+  }, req.params.id)
 })
 
 //get products list
 app.get(`products/list`, (req, res) => {
-  ProductList.find({})
-  .exec(function(err, list) {
+  queries.getProductList(function(err, results) {
     if (err) {
-      console.log('error getting products list' + err)
-    } else {
-      res.json(list)
+      throw err;
     }
+    res.send(results)
   })
 })
 
 //get styles by Id
 app.get(`products/productId/styles`, (req, res) => {
-  Styles.findOne({
-    _id: req.params.id
-  })
-  .exec(function(err, styles) {
+  queries.getStlyes(function(err, results) {
     if (err) {
-      console.log('error getting product styles' + err)
-    } else {
-      res.json(styles)
+      throw err;
     }
-  })
+    res.send(results)
+  }, req.params.id)
 })
 
 //get ratings for products
 app.get(`products/reviews/productId/meta`, (req, res) => {
-  Reviews.findOne({
-    _id: req.params.id
-  })
-  .exec(function(err, reviews) {
+  queries.getReviews(function(err, results) {
     if (err) {
-      console.log('error getting product styles' + err)
-    } else {
-      res.json(reviews)
+      throw err;
     }
-  })
+    res.send(results)
+  }, req.params.id)
 })
 
 //post items to the cart
 app.post(`cart/:userSession`, (req, res) => {
-  queries.getCartProducts(function(err, results) {
+  queries.postCartProducts(function(err, results) {
     if (err) {
-      console.log('error posting to cart' + err)
+      throw err;
     }
     res.send(results)
   }, req.params.userSession)
