@@ -30,9 +30,11 @@ node productGenerator.js --output=$FILEPATH --lines=$LINES
 node featureGenerator.js --output=$DIR/features.csv --lines=$LINES
 node styleGenerator.js --output=$DIR/styles.csv --lines=$LINES
 node photoGenerator.js --output=$DIR/photos.csv --lines=$LINES
+node skuGenerator.js --output=$DIR/skus.csv --lines=$LINES
 
 ### Import Our posts.csv file to seed Database ###
 psql -U $USER -d $DATABASE -c "COPY productinfo FROM '$FILEPATH' CSV HEADER";
 psql -U $USER -d $DATABASE -c "COPY features FROM '$DIR/data_generation/features.csv' CSV HEADER";
 psql -U $USER -d $DATABASE -c "COPY styles FROM '$DIR/data_generation/styles.csv' CSV HEADER";
 psql -U $USER -d $DATABASE -c "COPY photos FROM '$DIR/data_generation/photos.csv' CSV HEADER";
+psql -U $USER -d $DATABASE -c "COPY skus FROM '$DIR/data_generation/skus.csv' CSV HEADER";
