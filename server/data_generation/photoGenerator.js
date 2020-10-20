@@ -3,7 +3,7 @@ const faker = require('faker')
 const argv = require('yargs').argv
 
 const lines = 1000
-const filename = 'features.csv'
+const filename = 'photos.csv'
 const stream = fs.createWriteStream(filename)
 //features need id, feature & value
 
@@ -13,12 +13,13 @@ const startWriting = (writeStream, encoding, done) => {
   let i = lines;
   let id = 0;
 
+  //style needs stylename, price, default_style (1 or 0)
   const createPost = () => {
 
-    const feature = faker.commerce.productMaterial()
-    const featureValue = faker.commerce.productAdjective()
+    const photoUrl = faker.image.fashion()
+    const thumbnailUrl = faker.image.avatar()
 
-    return ` ${id},${id},${feature},${featureValue}\n`
+    return ` ${id},${id},${photoUrl},${thumbnailUrl}\n`
   }
 
   function writing(){
@@ -49,7 +50,7 @@ const startWriting = (writeStream, encoding, done) => {
 }
 
 //write our `header` line before we invoke the loop
-stream.write(`ID,feature,value\n`, 'utf-8')
+stream.write(`style_id,photo_id,url,thumbnail_url\n`, 'utf-8')
 //invoke startWriting and pass callback
 startWriting(stream, 'utf-8', () => {
   stream.end()
