@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(`../client/dist`));
 
 //Cart get request
-app.get(`cart/:userSession`, (req, res) => {
+app.get(`/cart/userSession`, (req, res) => {
   queries.getCartProducts(function(err, results) {
     if (err) {
       throw err;
@@ -20,34 +20,38 @@ app.get(`cart/:userSession`, (req, res) => {
   }, req.params.userSession)
 })
 
-//get products by id
-app.get(`/products/productId`, (req, res) => {
-  queries.getProductById(function(err, results) {
-    if (err) {
-      throw err;
-    }
-    res.send(results)
-  }, req.params.id)
-})
-
 //get products list
 app.get(`/products/list`, (req, res) => {
   queries.getProductList(function(err, results) {
     if (err) {
       throw err;
     }
+    console.log('cool beans')
     res.send(results)
   })
 })
 
+//get products by id
+app.get(`/products/:productId`, (req, res) => {
+  console.log('the params are: ', req.params)
+  queries.getProductById(function(err, results) {
+    if (err) {
+      throw err;
+    }
+    console.log('here are the resutls: ', results)
+    res.send(results)
+  }, req.params.productId)
+})
+
 //get styles by Id
 app.get(`/products/productId/styles`, (req, res) => {
+  //chain on query to get photos & skus
   queries.getStlyes(function(err, results) {
     if (err) {
       throw err;
     }
     res.send(results)
-  }, req.params.id)
+  }, req.params.productId)
 })
 
 //get ratings for products
@@ -57,7 +61,7 @@ app.get(`/products/reviews/productId/meta`, (req, res) => {
       throw err;
     }
     res.send(results)
-  }, req.params.id)
+  }, req.params.productId)
 })
 
 //post items to the cart

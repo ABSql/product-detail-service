@@ -34,6 +34,7 @@ const App = () => {
   useEffect(() => {
     getProductInfo(selectedProduct)
       .then((data) => setSelectedProduct(data))
+      .then((data) => console.log('heres what we get back: ', selectedProduct))
       .catch((err) => console.log(err));
   }, []);
 

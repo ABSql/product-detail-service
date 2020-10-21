@@ -14,7 +14,18 @@ client.connect(function(err) {
   console.log('Connected to postgres')
 });
 
+const getProductList = (cb, id) => {
+  client.query(`SELECT * FROM productinfo WHERE id < 6`, function(err, results) {
+    if (err) {
+      cb(err, null)
+    } else {
+      cb(null, results)
+    }
+  })
+}
+
 const getProductById = (cb, id) => {
+  console.log('here is the id in the queries: ', id)
   client.query(`SELECT * FROM productinfo WHERE id = ${id}`, function(err, results) {
     if (err) {
       cb(err, null)
@@ -34,8 +45,8 @@ const getStyles = (cb, id) => {
   })
 }
 
-const getProductList = (cb, id) => {
-  client.query(`SELECT * FROM productinfo WHERE id < 6`, function(err, results) {
+const getReviews = (cb, id) => {
+  client.query(`SELECT * FROM ratings WHERE id = ${id}`, function(err, results) {
     if (err) {
       cb(err, null)
     } else {
