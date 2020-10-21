@@ -3,13 +3,12 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const PORT = 9000;
-const queries = require()
+const queries = require('./queries.js')
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(`../client/dist`));
-
 
 //Cart get request
 app.get(`cart/:userSession`, (req, res) => {
@@ -22,7 +21,7 @@ app.get(`cart/:userSession`, (req, res) => {
 })
 
 //get products by id
-app.get(`products/:productId`, (req, res) => {
+app.get(`/products/productId`, (req, res) => {
   queries.getProductById(function(err, results) {
     if (err) {
       throw err;
@@ -32,7 +31,7 @@ app.get(`products/:productId`, (req, res) => {
 })
 
 //get products list
-app.get(`products/list`, (req, res) => {
+app.get(`/products/list`, (req, res) => {
   queries.getProductList(function(err, results) {
     if (err) {
       throw err;
@@ -42,7 +41,7 @@ app.get(`products/list`, (req, res) => {
 })
 
 //get styles by Id
-app.get(`products/productId/styles`, (req, res) => {
+app.get(`/products/productId/styles`, (req, res) => {
   queries.getStlyes(function(err, results) {
     if (err) {
       throw err;
@@ -52,7 +51,7 @@ app.get(`products/productId/styles`, (req, res) => {
 })
 
 //get ratings for products
-app.get(`products/reviews/productId/meta`, (req, res) => {
+app.get(`/products/reviews/productId/meta`, (req, res) => {
   queries.getReviews(function(err, results) {
     if (err) {
       throw err;
@@ -62,7 +61,7 @@ app.get(`products/reviews/productId/meta`, (req, res) => {
 })
 
 //post items to the cart
-app.post(`cart/:userSession`, (req, res) => {
+app.post(`cart/userSession`, (req, res) => {
   queries.postCartProducts(function(err, results) {
     if (err) {
       throw err;
