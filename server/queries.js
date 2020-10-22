@@ -75,11 +75,11 @@ const getSkus = (cb, id) => {
 }
 
 const getReviews = (cb, id) => {
-  client.query(`SELECT * FROM ratings WHERE id = ${id}`, function(err, results) {
+  client.query(`SELECT * FROM ratings WHERE rating_product = ${id}`, function(err, results) {
     if (err) {
       cb(err, null)
     } else {
-      cb(null, results)
+      cb(null, results.rows[0])
     }
   })
 }

@@ -10,16 +10,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(`../client/dist`));
 
-//Cart get request
-app.get(`/cart/userSession`, (req, res) => {
-  queries.getCartProducts(function(err, results) {
-    if (err) {
-      throw err;
-    }
-    res.send(results)
-  }, req.params.userSession)
-})
-
 //get products list
 app.get(`/products/list`, (req, res) => {
   queries.getProductList(function(err, results) {
@@ -126,16 +116,37 @@ app.get(`/products/:productId/styles`, (req, res) => {
   }, req.params.productId)
 })
 
-
-
 //get ratings for products
-app.get(`/products/reviews/productId/meta`, (req, res) => {
+app.get(`/reviews/:productId/meta`, (req, res) => {
+  const ratingsMiddleman = [];
   queries.getReviews(function(err, results) {
     if (err) {
       throw err;
     }
-    res.send(results)
+    ratingsMiddleman.push(results)
+    console.log('ratings results: ', ratingsMiddleman)
+    const toSend = {
+      "product_id": String(ratingsMiddleman[0].rating_product),
+      "ratings": {
+        "1": ratingsMiddleman[0].one,
+        "2": ratingsMiddleman[0].two,
+        "3": ratingsMiddleman[0].three,
+        "4": ratingsMiddleman[0].four,
+        "5": ratingsMiddleman[0].five
+      }
+    }
+    res.send(toSend)
   }, req.params.productId)
+})
+
+//Cart get request
+app.get(`/cart/userSession`, (req, res) => {
+  queries.getCartProducts(function(err, results) {
+    if (err) {
+      throw err;
+    }
+    res.send(results)
+  }, req.params.userSession)
 })
 
 //post items to the cart
