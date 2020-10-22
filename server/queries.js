@@ -25,12 +25,11 @@ const getProductList = (cb, id) => {
 }
 
 const getProductById = (cb, id) => {
-  console.log('here is the id in the queries: ', id)
   client.query(`SELECT * FROM productinfo WHERE id = ${id}`, function(err, results) {
     if (err) {
       cb(err, null)
     } else {
-      cb(null, results)
+      cb(null, results.rows[0])
     }
   })
 }
@@ -40,7 +39,17 @@ const getStyles = (cb, id) => {
     if (err) {
       cb(err, null)
     } else {
-      cb(null, results)
+      cb(null, results.rows[0])
+    }
+  })
+}
+
+const getPhotos = (cb, id) => {
+  client.query(`SELECT * FROM photos WHERE photo_style = ${id}`, function(err, results) {
+    if (err) {
+      cb(err, null)
+    } else {
+      cb(null, results.rows[0])
     }
   })
 }
@@ -61,6 +70,8 @@ module.exports = {
   getProductById,
   getProductList,
   getStyles,
-  // getReviews,
+  getReviews,
+  getPhotos,
+  //getSkus
   // postCartProducts,
 }

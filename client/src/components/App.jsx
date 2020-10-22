@@ -34,12 +34,12 @@ const App = () => {
   useEffect(() => {
     getProductInfo(selectedProduct)
       .then((data) => setSelectedProduct(data))
-      .then((data) => console.log('heres what we get back: ', selectedProduct))
       .catch((err) => console.log(err));
   }, []);
 
   useEffect(() => {
     getProductStyles(selectedProduct)
+    .then(console.log('HERE styles: ', selectedProduct))
       .then((data) => setCurrentStyle([]))
       .catch((err) => console.log(err));
   }, []);
@@ -66,15 +66,15 @@ const App = () => {
     <div id="body-kg">
       <Header className="headerStyle-kg" userSessionData={userSessionData}
       productList={productList}/>
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-8">
+      <div className="container">
+        <div className="row">
+          <div className="col-sm-8">
             <div>
               <PhotoCarousel currentStyle={currentStyle}
               currentProduct={selectedProduct}/>
             </div>
           </div>
-          <div class="col-sm-4">
+          <div className="col-sm-4">
             <ProductDescription
             selected={selectedProduct}
             style={currentStyle}
@@ -89,7 +89,7 @@ const App = () => {
             updateCartHeader={setUserSessionData}/>
           </div>
         </div>
-        <div class="row">
+        <div className="row">
           <SloganDescription
           selected={selectedProduct}
           style={currentStyle}/>

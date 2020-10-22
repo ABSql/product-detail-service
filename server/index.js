@@ -26,33 +26,42 @@ app.get(`/products/list`, (req, res) => {
     if (err) {
       throw err;
     }
-    console.log('cool beans')
     res.send(results)
   })
 })
 
 //get products by id
 app.get(`/products/:productId`, (req, res) => {
-  console.log('the params are: ', req.params)
   queries.getProductById(function(err, results) {
     if (err) {
       throw err;
     }
-    console.log('here are the resutls: ', results)
     res.send(results)
+    console.log('are we still getting the product: ', results)
   }, req.params.productId)
 })
 
+const toSend = []
 //get styles by Id
-app.get(`/products/productId/styles`, (req, res) => {
+app.get(`/products/:productId/styles`, (req, res) => {
   //chain on query to get photos & skus
-  queries.getStlyes(function(err, results) {
+  queries.getStyles(function(err, results) {
     if (err) {
       throw err;
     }
-    res.send(results)
+    toSend.push(results)
+  }, req.params.productId)
+  queries.getPhotos(function(err, results) {
+    if (err) {
+      throw err;
+    }
+    toSend.push(results)
+    res.send(toSend)
+    console.log(toSend)
   }, req.params.productId)
 })
+
+
 
 //get ratings for products
 app.get(`/products/reviews/productId/meta`, (req, res) => {
