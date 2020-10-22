@@ -56,5 +56,8 @@ const startWriting = (writeStream, encoding, done) => {
 stream.write(`ID, Product name, slogan, description, category, price\n`, 'utf-8')
 //invoke startWriting and pass callback
 startWriting(stream, 'utf-8', () => {
+  console.time('data generation')
   stream.end()
+  console.timeLog('data generation')
+  console.timeEnd('data generation')
 })
