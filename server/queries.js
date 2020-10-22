@@ -34,6 +34,16 @@ const getProductById = (cb, id) => {
   })
 }
 
+const getFeatures = (cb, id) => {
+  client.query(`SELECT * FROM features WHERE featureproduct = ${id}`, function(err, results) {
+    if (err) {
+      cb(err, null)
+    } else {
+      cb(null, results.rows[0])
+    }
+  })
+}
+
 const getStyles = (cb, id) => {
   client.query(`SELECT * FROM styles WHERE productstyle = ${id}`, function(err, results) {
     if (err) {
@@ -54,6 +64,16 @@ const getPhotos = (cb, id) => {
   })
 }
 
+const getSkus = (cb, id) => {
+  client.query(`SELECT * FROM skus WHERE sku_style = ${id}`, function(err, results) {
+    if (err) {
+      cb(err, null)
+    } else {
+      cb(null, results.rows[0])
+    }
+  })
+}
+
 const getReviews = (cb, id) => {
   client.query(`SELECT * FROM ratings WHERE id = ${id}`, function(err, results) {
     if (err) {
@@ -66,12 +86,13 @@ const getReviews = (cb, id) => {
 
 
 module.exports = {
-  // getCartProducts,
   getProductById,
+  getFeatures,
   getProductList,
   getStyles,
   getReviews,
   getPhotos,
-  //getSkus
+  getSkus
   // postCartProducts,
+  // getCartProducts,
 }
