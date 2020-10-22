@@ -39,8 +39,8 @@ const App = () => {
 
   useEffect(() => {
     getProductStyles(selectedProduct)
-    .then(console.log('HERE styles: ', selectedProduct))
       .then((data) => setCurrentStyle([]))
+      .then(console.log('HERE styles: ', currentStyle))
       .catch((err) => console.log(err));
   }, []);
 
