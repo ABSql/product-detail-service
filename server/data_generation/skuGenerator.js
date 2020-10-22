@@ -2,7 +2,7 @@ const fs = require('fs')
 const faker = require('faker')
 const argv = require('yargs').argv
 
-const lines = 100000
+const lines = 10000000
 const filename = 'skus.csv'
 const stream = fs.createWriteStream(filename)
 //features need id, feature & value

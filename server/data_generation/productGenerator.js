@@ -2,7 +2,7 @@ const fs = require('fs')
 const faker = require('faker')
 const argv = require('yargs').argv
 
-const lines = 1000000
+const lines = 10000000
 const filename = 'products.csv'
 console.log(argv.output)
 const stream = fs.createWriteStream(filename)

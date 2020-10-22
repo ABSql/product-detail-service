@@ -26,6 +26,7 @@ SCHEMA="$DIR/schema.sql"
 psql -U $USER < $SCHEMA
 
 ### Run Our Generator Script ###
+start=$SECONDS
 node productGenerator.js --output=$DIR/products.csv --lines=$LINES
 node featureGenerator.js --output=$DIR/features.csv --lines=$LINES
 node styleGenerator.js --output=$DIR/styles.csv --lines=$LINES
@@ -40,3 +41,4 @@ psql -U $USER -d $DATABASE -c "COPY styles FROM '$DIR/data_generation/styles.csv
 psql -U $USER -d $DATABASE -c "COPY photos FROM '$DIR/data_generation/photos.csv' CSV HEADER";
 psql -U $USER -d $DATABASE -c "COPY skus FROM '$DIR/data_generation/skus.csv' CSV HEADER";
 psql -U $USER -d $DATABASE -c "COPY ratings FROM '$DIR/data_generation/ratings.csv' CSV HEADER";
+echo duration=$(( SECONDS - start ))

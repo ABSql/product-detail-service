@@ -1,0 +1,14 @@
+config:
+  target: http://localhost:9000/
+  phases:
+    - duration: 60
+      arrivalRate: 25
+      name: "Initial Phase"
+    - duration: 60
+      arrivalRate: 50
+      name: "sustained load"
+  defaults:
+scenarios:
+  - flow:
+      - get:
+          url: "/"
