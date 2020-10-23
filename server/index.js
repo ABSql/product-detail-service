@@ -10,6 +10,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(`../client/dist`));
 
+require('newrelic');
 //get products list
 app.get(`/products/list`, (req, res) => {
   queries.getProductList(function(err, results) {
