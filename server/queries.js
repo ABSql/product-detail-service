@@ -45,7 +45,7 @@ const getFeatures = (cb, id) => {
 }
 
 const getStyles = (cb, id) => {
-  client.query(`SELECT * FROM styles WHERE productstyle = ${id}  LIMIT 1`, function(err, results) {
+  client.query(`SELECT * FROM styles FULL JOIN photos ON style_id = photo_style WHERE style_id = ${id}`, function(err, results) {
     if (err) {
       cb(err, null)
     } else {
@@ -96,3 +96,16 @@ module.exports = {
   // postCartProducts,
   // getCartProducts,
 }
+
+
+/*
+const getStyles = (cb, id) => {
+  client.query(`SELECT * FROM styles WHERE productstyle = ${id}  LIMIT 1`, function(err, results) {
+    if (err) {
+      cb(err, null)
+    } else {
+      cb(null, results.rows[0])
+    }
+  })
+}
+*/

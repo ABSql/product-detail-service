@@ -61,13 +61,9 @@ app.get(`/products/:productId/styles`, (req, res) => {
     if (err) {
       throw err;
     }
+    console.log('new styles results: ', results)
     middleman.push(results)
   }, req.params.productId)
-  queries.getPhotos(function(err, results) {
-    if (err) {
-      throw err;
-    }
-    middleman.push(results)
 
     queries.getSkus(function(err, results) {
       if (err) {
@@ -85,28 +81,28 @@ app.get(`/products/:productId/styles`, (req, res) => {
             'default?': 0,
             'photos': [
               {
-                'thumbnail_url': middleman[1].thumbnail_url,
-                'url': middleman[1].photo_url
+                'thumbnail_url': middleman[0].thumbnail_url,
+                'url': middleman[0].photo_url
               }
             ],
             'skus': {
-              "XS": middleman[2].xs,
-              "S": middleman[2].s,
-              "M": middleman[2].m,
-              "L": middleman[2].l,
-              "XL": middleman[2].xl,
-              "XXL": middleman[2].xxl,
-              "7": middleman[2].seven,
-              "8": middleman[2].eight,
-              "9": middleman[2].nine,
-              "10": middleman[2].ten,
-              "11": middleman[2].eleven,
-              "12": middleman[2].twelve,
-              "7.5": middleman[2].seven_half,
-              "8.5": middleman[2].eight_half,
-              "9.5": middleman[2].nine_half,
-              "10.5": middleman[2].ten_half,
-              "11.5": middleman[2].eleven_half,
+              "XS": middleman[1].xs,
+              "S": middleman[1].s,
+              "M": middleman[1].m,
+              "L": middleman[1].l,
+              "XL": middleman[1].xl,
+              "XXL": middleman[1].xxl,
+              "7": middleman[1].seven,
+              "8": middleman[1].eight,
+              "9": middleman[1].nine,
+              "10": middleman[1].ten,
+              "11": middleman[1].eleven,
+              "12": middleman[1].twelve,
+              "7.5": middleman[1].seven_half,
+              "8.5": middleman[1].eight_half,
+              "9.5": middleman[1].nine_half,
+              "10.5": middleman[1].ten_half,
+              "11.5": middleman[1].eleven_half,
 
             }
           }
@@ -114,7 +110,6 @@ app.get(`/products/:productId/styles`, (req, res) => {
       }
       res.send(toSend)
     }, req.params.productId)
-  }, req.params.productId)
 })
 
 //get ratings for products
