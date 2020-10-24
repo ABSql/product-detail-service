@@ -125,7 +125,7 @@ app.get(`/reviews/:productId/meta`, (req, res) => {
       throw err;
     }
     ratingsMiddleman.push(results)
-    console.log('ratings results: ', ratingsMiddleman)
+    // console.log('ratings results: ', ratingsMiddleman)
     const toSend = {
       "product_id": String(ratingsMiddleman[0].rating_product),
       "ratings": {

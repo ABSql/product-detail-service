@@ -1,14 +1,40 @@
+
 config:
-  target: http://localhost:9000/
+  target: "http://localhost:9000"
+  http:
+    pool: 100
   phases:
+    - duration: 30
+      arrivalRate: 15
+      name: Warm up
     - duration: 60
       arrivalRate: 25
-      name: "Initial Phase"
-    - duration: 60
-      arrivalRate: 50
-      name: "sustained load"
-  defaults:
+      rampTo: 200
+      name: Ramp up load
+    - duration: 30
+      arrivalRate: 10
+      name: Sustained load
+
+
 scenarios:
-  - flow:
+  - name: 'Get two products'
+    flow:
       - get:
-          url: "/"
+          url: '/'
+      - loop:
+        - get:
+            url: '/products/{{$randomNumber(1,100000)}}'
+        - get:
+            url: '/products/{{$randomNumber(1,100000)}}/styles'
+        - get:
+            url: '/reviews/{{$randomNumber(1,100000)}}/meta'
+        count: 2
+
+  - name: 'get products list'
+    flow:
+      - get:
+          url: '/'
+      - loop:
+        - get:
+            url: '/products/list'
+        count: 1

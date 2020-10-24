@@ -49,6 +49,7 @@
     "jest-enzyme": "^7.1.2",
     "material-ui-popup-state": "^1.6.1",
     "mongoose": "^5.10.9",
+    "newrelic": "^6.13.2",
     "nodemon": "^2.0.4",
     "pg": "^8.4.1",
     "react": "^16.13.1",
