@@ -15,7 +15,7 @@ client.connect(function(err) {
 });
 
 const getProductList = (cb, id) => {
-  client.query(`SELECT * FROM productinfo WHERE id < 6  LIMIT 5`, function(err, results) {
+  client.query(`SELECT * FROM productinfo WHERE id < 6 LIMIT 5`, function(err, results) {
     if (err) {
       cb(err, null)
     } else {
@@ -25,7 +25,7 @@ const getProductList = (cb, id) => {
 }
 
 const getProductById = (cb, id) => {
-  client.query(`SELECT * FROM productinfo WHERE id = ${id} LIMIT 1`, function(err, results) {
+  client.query(`SELECT * FROM productinfo FULL JOIN features ON id = featureproduct WHERE id = ${id} LIMIT 1`, function(err, results) {
     if (err) {
       cb(err, null)
     } else {
@@ -35,7 +35,7 @@ const getProductById = (cb, id) => {
 }
 
 const getFeatures = (cb, id) => {
-  client.query(`SELECT * FROM features WHERE featureproduct = ${id}  LIMIT 1`, function(err, results) {
+  client.query(`SELECT * FROM features WHERE featureproduct = ${id} LIMIT 1`, function(err, results) {
     if (err) {
       cb(err, null)
     } else {
@@ -45,7 +45,7 @@ const getFeatures = (cb, id) => {
 }
 
 const getStyles = (cb, id) => {
-  client.query(`SELECT * FROM styles FULL JOIN photos ON style_id = photo_style WHERE style_id = ${id}`, function(err, results) {
+  client.query(`SELECT * FROM styles FULL JOIN photos ON style_id = photo_style WHERE style_id = ${id} LIMIT 1`, function(err, results) {
     if (err) {
       cb(err, null)
     } else {
@@ -55,7 +55,7 @@ const getStyles = (cb, id) => {
 }
 
 const getPhotos = (cb, id) => {
-  client.query(`SELECT * FROM photos WHERE photo_style = ${id}  LIMIT 1`, function(err, results) {
+  client.query(`SELECT * FROM photos WHERE photo_style = ${id} LIMIT 1`, function(err, results) {
     if (err) {
       cb(err, null)
     } else {
@@ -65,7 +65,7 @@ const getPhotos = (cb, id) => {
 }
 
 const getSkus = (cb, id) => {
-  client.query(`SELECT * FROM skus WHERE sku_style = ${id}  LIMIT 1`, function(err, results) {
+  client.query(`SELECT * FROM skus WHERE sku_style = ${id} LIMIT 1`, function(err, results) {
     if (err) {
       cb(err, null)
     } else {
@@ -75,7 +75,7 @@ const getSkus = (cb, id) => {
 }
 
 const getReviews = (cb, id) => {
-  client.query(`SELECT * FROM ratings WHERE rating_product = ${id}  LIMIT 1`, function(err, results) {
+  client.query(`SELECT * FROM ratings WHERE rating_product = ${id} LIMIT 1`, function(err, results) {
     if (err) {
       cb(err, null)
     } else {

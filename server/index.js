@@ -30,10 +30,6 @@ app.get(`/products/:productId`, (req, res) => {
     }
     productMiddleman.push(results);
 
-    queries.getFeatures(function(err, results) {
-      if (err) {
-        throw err;
-      }
       productMiddleman.push(results)
       const toSend = {
         "id": productMiddleman[0].id,
@@ -44,13 +40,12 @@ app.get(`/products/:productId`, (req, res) => {
         "default_price": productMiddleman[0].default_price,
         "features": [
           {
-            "feature": productMiddleman[1].feature,
-            "value": productMiddleman[1].feature_value
+            "feature": productMiddleman[0].feature,
+            "value": productMiddleman[0].feature_value
           }
         ]
       }
       res.send(toSend)
-    }, req.params.productId)
   }, req.params.productId)
 })
 
