@@ -23,22 +23,25 @@ LINES=${1:-10000000}
 #psql -f schema.sql -h 127.0.0.1 -p 5432 -U postgres
 SCHEMA="$DIR/schema.sql"
 #psql -f $SCHEMA -h 127.0.0.1 -p 5432 -U $USER
-psql -U $USER < $SCHEMA
+# add host etc.
+psql -h 18.221.197.224 -p 5432 -U postgres < $SCHEMA
 
 ### Run Our Generator Script ###
-start=$SECONDS
-node productGenerator.js --output=$DIR/products.csv --lines=$LINES
-node featureGenerator.js --output=$DIR/features.csv --lines=$LINES
-node styleGenerator.js --output=$DIR/styles.csv --lines=$LINES
-node photoGenerator.js --output=$DIR/photos.csv --lines=$LINES
-node skuGenerator.js --output=$DIR/skus.csv --lines=$LINES
-node ratingsGenerator.js --output=$DIR/ratings.csv --lines=$LINES
+# start=$SECONDS
+# node productGenerator.js --output=$DIR/products.csv --lines=$LINES
+# node featureGenerator.js --output=$DIR/features.csv --lines=$LINES
+# node styleGenerator.js --output=$DIR/styles.csv --lines=$LINES
+# node photoGenerator.js --output=$DIR/photos.csv --lines=$LINES
+# node skuGenerator.js --output=$DIR/skus.csv --lines=$LINES
+# node ratingsGenerator.js --output=$DIR/ratings.csv --lines=$LINES
 
 ### Import Our posts.csv file to seed Database ###
-psql -U $USER -d $DATABASE -c "COPY productinfo FROM '$DIR/data_generation/products.csv' CSV HEADER";
-psql -U $USER -d $DATABASE -c "COPY features FROM '$DIR/data_generation/features.csv' CSV HEADER";
-psql -U $USER -d $DATABASE -c "COPY styles FROM '$DIR/data_generation/styles.csv' CSV HEADER";
-psql -U $USER -d $DATABASE -c "COPY photos FROM '$DIR/data_generation/photos.csv' CSV HEADER";
-psql -U $USER -d $DATABASE -c "COPY skus FROM '$DIR/data_generation/skus.csv' CSV HEADER";
-psql -U $USER -d $DATABASE -c "COPY ratings FROM '$DIR/data_generation/ratings.csv' CSV HEADER";
+psql -h 18.221.197.224 -p 5432  -U $USER -d $DATABASE -c "COPY productinfo FROM '$DIR/data_generation/products.csv' CSV HEADER";
+psql -h 18.221.197.224 -p 5432  -U $USER -d $DATABASE -c "COPY features FROM '$DIR/data_generation/features.csv' CSV HEADER";
+psql -h 18.221.197.224 -p 5432  -U $USER -d $DATABASE -c "COPY styles FROM '$DIR/data_generation/styles.csv' CSV HEADER";
+ppsql -h 18.221.197.224 -p 5432 sql -U $USER -d $DATABASE -c "COPY photos FROM '$DIR/data_generation/photos.csv' CSV HEADER";
+ppsql -h 18.221.197.224 -p 5432 sql -U $USER -d $DATABASE -c "COPY skus FROM '$DIR/data_generation/skus.csv' CSV HEADER";
+psql -h 18.221.197.224 -p 5432  -U $USER -d $DATABASE -c "COPY ratings FROM '$DIR/data_generation/ratings.csv' CSV HEADER";
 echo duration=$(( SECONDS - start ))
+
+# psql -h 18.221.197.224 -p 5432  -U postgres -d productdetailsdb -c "COPY features FROM 'https://product-service-bucket123.s3.us-east-2.amazonaws.com/features.csv' CSV HEADER";
