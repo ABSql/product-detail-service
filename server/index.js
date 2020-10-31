@@ -56,7 +56,6 @@ app.get(`/products/:productId/styles`, (req, res) => {
     if (err) {
       throw err;
     }
-    console.log('new styles results: ', results)
     middleman.push(results)
   }, req.params.productId)
 
